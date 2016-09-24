@@ -15,7 +15,7 @@ class my_vector {
             m_array = new T[m_capacity];
         }
 
-        void push_back(T e) {
+        void push_back(T e) {                   // e == element
             if(m_size+1>m_capacity) {
                 resize();
                 push_back(e);
@@ -26,12 +26,17 @@ class my_vector {
             }
         }
 
-        void insert(T element, int position) {
+        void insert(T e, int p) {                   // p == position
             if(m_size+1>m_capacity) {
-                for(int i=m_size; i != position; i--) {
+                resize();
+                insert(e, p);
+            }
+            else {
+                for(int i=m_size; i > p; i--) {
                     m_array[i] = m_array[i-1];
                 }
-                m_array[position] = element;
+                m_array[p] = e;
+                m_size++;
             }
         }
 
@@ -53,8 +58,6 @@ class my_vector {
 
         void get() {}
 
-        void push_back() {}
-
         void print(){
             cout << "m_size: " << m_size << endl;
             for(int i=0; i<m_size; i++) {
@@ -74,9 +77,10 @@ int main() {
     v.push_back(2);
     v.push_back(3);
     v.push_back(4);
-    v.push_back(5);
     v.push_back(6);
-    v.push_back(7);
+    v.push_back(8);
+    v.insert(5, 4);
+    v.insert(7, 6);
     v.print();
 
     return 0;
