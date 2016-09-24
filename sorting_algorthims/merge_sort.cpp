@@ -1,42 +1,74 @@
 #include <iostream>
-#include "main.h"
 using namespace std;
 
-/*.
-Sorts an array of integers using the Insertion algorithm
-*/
+// NOT FINISHED........................!!!!!!!!!!!!!!!
 
-int* sort_array(int arr[], int size, int unsorted=1) { // remember: size is actually "--size"
 
-    if(unsorted==size) {
-        return arr;
-    }
-    else {
-        int next_element = arr[unsorted];
-        int j = unsorted;
-
-        while(j>0 && next_element<arr[j-1]) {
-            arr[j] = arr[j-1];
-            j--;
-        }
-        arr[j] = next_element;
-        sort_array(arr, size, ++unsorted);
+void print_arr(int arr[]){
+    int size = sizeof(*arr);
+    cout << "size: " << size << endl;
+    for(int i=0; i<size; i++) {
+        cout << arr[i] << endl;
     }
 }
 
-int main()
-{
-    int size=5;
-    //int unsorted[size] = {9, 4, 2, 1, 3};     // փորձերի համար (որ անընդհատ ձեռքով չմուտքագրես)
-    int unsorted[size];
-    input_to_array(unsorted, size);
+/*
+int* merge(int arr_1[], int arr_2[]) {
+    int size = sizeof(arr_1) + sizeof(arr_2);
+    int* arr_temp = new int[size];
 
-    cout << "unsorted array: " << endl;
-    print_array(unsorted, size);
-    cout << endl;
+    while(sizeof(*arr_1)>0 && sizeof(*arr_2)>0) {
+        if(arr_1[0] > arr_2[0]) {
+            arr_temp.push_back(arr_2[0]);
+            delete[] arr_2;
+        }
+        else {
+            arr_temp.push_back(arr_2[0]);
+            delete[] arr_1;
+        }
+    }
 
-    int *sorted = sort_array(unsorted, size);
+    return arr_temp;
+}
+*/
 
-    cout << endl << "sorted array: " << endl;
-    print_array(sorted, size);
+void merge_sort(int arr[]) {
+    int n = sizeof(*arr);               //cout << "n: " << n << endl;
+    if(n==0) {}
+    else {
+        cout << "size arr (n): " << n << endl;
+        int arr_1[2];
+        int arr_2[2];
+
+        print_arr(arr);
+        cout << "size arr_1: " << sizeof(*arr_1) << endl;
+        cout << "size arr_2: " << sizeof(*arr_2) << endl;
+        /*
+        for(int i=0; i<n/2; i++) {
+            arr_1[i] == arr[i];
+        }
+
+        for(int i=n/2; i<n; i++) {
+            arr_2[i-(n/2)] = arr[i];
+        } */
+        //copy(arr+0, arr+((n/2)-1), arr_1);
+        //copy(arr+(n/2), arr+(n-1), arr_2);
+
+        print_arr(arr_1);
+        print_arr(arr_2);
+        //merge_sort(arr_1);
+        //merge_sort(arr_2);
+
+        //return merge(arr_1, arr_2);
+    }
+}
+
+
+int main()  {
+
+    int size = 4;
+    int unsorted[size] = {9, 4, 1, 3};
+
+    merge_sort(unsorted);
+    return 0;
 }
