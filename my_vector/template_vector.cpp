@@ -54,7 +54,6 @@ public:
         for(int i=p; i<m_size-1; i++) {
             m_array[i] = m_array[i+1];
         }
-        m_array[m_size-1] = NULL;
         m_size--;
     }
 
@@ -102,9 +101,3 @@ int main() {
 
     return 0;
 }
-
-
-/*
-int array[10]
-int* array = new int(x)
-*/
