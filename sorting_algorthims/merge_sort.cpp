@@ -23,7 +23,6 @@ void merge(int *main_arr, int size, int *left_arr, int *right_arr) {
     print_array(main_arr, 9);
 }
 
-
 void mergesort(int *arr, int size) {
     if(size < 2)
     return;
@@ -55,11 +54,6 @@ int main() {
 
   int size = 9;
   int unsorted[size] = {2, 4, 7, 20, 1, 3, 5, 12, 6};
-
-// 1 2 3 4 5 6 7 12 20
-
-//  int left_arr[] = {1, 2, 4, 6};
-//  int right_arr[] = {3, 5, 7, 8};
 
   print_array(unsorted, size);
   mergesort(unsorted, size);
