@@ -1,109 +1,116 @@
 #include <iostream>
 using namespace std;
-// destructor
-// operator overloading
-// stack: last in, first out    > push, pop, is_empty, get_size, get_top, print
-// queue: first in, first out
 
-template <class T>
+template <class N>
 class node {
 public:
-    T data;
-    node* next;
+  N data;
+  node* next;
 };
 
-template <class P>
+template <class L>
 class my_list {
+private:
+  node<L>* m_head;
+  node<L>* m_end;
+  unsigned int m_size;
+
 public:
-    node<P>* m_head;
-    node<P>* m_end;
-    int m_size;
+  my_list() { // default constructor
+    m_head = NULL;
+    m_size = 0;
+  }
 
-    my_list() {
-        m_head = NULL;
-        m_end = NULL;
-        m_size = 0;
+  unsigned int get_size() {
+    return m_size;
+  }
+
+  void push_front(L value) {
+    node<L>* el = new node<L>; // el is the new element
+    el->data = value;
+    el->next = m_head;
+    m_head = el;
+    m_size++;
+  }
+
+  void insert(L value, unsigned int position) {
+    if(position == 0) {
+      push_front(value);
     }
 
-    void size() {
-        //cout << "SIZE" << endl;
-        cout << m_size << endl;
+    else {
+      node<L>* el = new node<L>;
+      el->data = value;
+
+      node<L>* prev = m_head; // prev is the previous node
+      while(position > 1) {
+        prev = prev->next;
+        position--;
+      }
+
+      el->next = prev->next;
+      prev->next = el;
+      m_size++;
+    }
+  }
+
+  void remove(unsigned int position) {
+    node<L>* el = m_head;
+
+    if(position == 0) {
+      m_head = el->next;
     }
 
-    void print() {
-        node<P>* e = m_head;            // each element in the list
-            cout << e->data << endl;
-        if(m_size > 1) {
-            e = m_head->next;
-            cout << e->data << endl;
-        }
+    else {
+      node<L>* prev = m_head;   // to identify the previous element
+      for(int i=position; i > 1; i--) {
+        prev = prev->next;
+      }
+
+      el = prev->next;
+      prev->next = el->next;
+    }
+      delete el;
+      m_size--;
     }
 
-        //while(m_size > 0 && e->next != NULL) {
-        //    int* data = &e->data;
-        //    cout << &data << endl;
-        //    e = e->next;
-        //}
-
-        /*cout << "PRINT" << endl;
-
-        if(m_head != NULL) {
-            cout << m_head->data << endl;
-
-            while(m_head->next != NULL) {
-                cout << "    WHILE" << endl;
-
-                cout << &m_head << endl;
-            }
-        }
-    */
-
-    void push_front(P value) {
-        cout << "PUSH_FRONT" << endl;
-
-        node<P>* n =  new node<P>;
-        n->data = value;
-        n->next = NULL;
-        m_head = n;
-        m_size++;
+  void print() {
+    node<L>* element = m_head; // element == each element in the list
+    while(element != NULL) {
+      cout << element->data << endl;
+      element = element->next;
     }
-/*
-    insert (P, v)
-    if first element : push_front
-    else:
-        node<P>* temp = new node
-        node -> data = v
-        node* n = get(P-1) ??              // find position
-        temp->next = n->next
-        n->next = temp;
+  }
 
-node* get (unsigned int P)
-    node* temp = head
-    while(temp != Null & i != p)
-    i++
-    temp = temp->next
-return temp;
+  void destructor() {
+    ;
+  }
 
-void destructor() {
-
-}
-*/
 };
 
 int main() {
 
     my_list<int> velocities;
-    velocities.size();
-    //velocities.print();
+    cout << "size: " << velocities.get_size() << endl;
+    velocities.print();
 
+    cout << endl << "testing pushfront" << endl;
     velocities.push_front(42);
     velocities.push_front(1984);
     velocities.push_front(23);
-    velocities.size();
-
+    cout << "size: " << velocities.get_size() << endl;
     velocities.print();
 
-    //cout << velocities.m_head->data << endl;
+    cout << endl << "testing insert" << endl;
+    velocities.insert(1985, 1);
+    cout << "size: " << velocities.get_size() << endl;
+    velocities.print();
+
+    cout << endl << "testing remove" << endl;
+    velocities.remove(3);
+    //velocities.remove(0);
+    cout << "size: " << velocities.get_size() << endl;
+    velocities.print();
 
     return 0;
 }
