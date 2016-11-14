@@ -1,10 +1,10 @@
-C++ implementation of list
+Template implementation of list with C++
 
 Member functions:
 
-get_size;
-push_front;
-insert;
-remove;
-print;
+get_size();
+push_front(value);
+insert(value, position);
+remove(position);
+print();
 
