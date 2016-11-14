@@ -6,24 +6,20 @@ using namespace std;
 Sorts an array of integers using the Selection Sort algorithm
 */
 
-int* sort_array(int arr[], int size)
-{
+int* sort_array(int arr[], int size) {
 
-    for(int i=size; i>1; i--)
-    {
-        int j = 0;
-        int max = arr[j];                 // first element is condifitionally considered the largest
+    int size = arr_size;
 
-        for(int k=1; k<i; k++)
-        {
-            if(arr[k] > max)
-            {
-                max = arr[k];
-                j = k;
+    for(int k=0; k<size; size--) {
+        int largest = 0;                            // here we'll keep the index of the largest element
+
+        for(int i=1; i<size; i++) {             // find the largst element
+            if(arr[i] > arr[largest]) {
+                largest = i;
             }
         }
 
-        swap(&arr[i-1], &arr[j]);    // swap the element with largest integer and the last element
+        swap(&arr[size-1], &arr[largest]);      // swap largest element and last element
     }
 
     return arr;
