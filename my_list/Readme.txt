@@ -1,4 +1,4 @@
-Template implementation of list with C++
+Linked list implementation in C++
 
 Member functions:
 
