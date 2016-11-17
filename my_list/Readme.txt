@@ -1,4 +1,4 @@
-Linked list implementation in C++
+Single linked list implementation in C++
 
 Member functions:
 
