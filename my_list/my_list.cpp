@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 template <class N>
 class node {
@@ -77,7 +76,7 @@ public:
   void print() {
     node<L>* element = m_head; // element == each element in the list
     while(element != NULL) {
-      cout << element->data << endl;
+      std::cout << element->data << std::endl;
       element = element->next;
     }
   }
@@ -87,30 +86,3 @@ public:
   }
 
 };
-
-int main() {
-
-    my_list<int> velocities;
-    cout << "size: " << velocities.get_size() << endl;
-    velocities.print();
-
-    cout << endl << "testing pushfront" << endl;
-    velocities.push_front(42);
-    velocities.push_front(1984);
-    velocities.push_front(23);
-    cout << "size: " << velocities.get_size() << endl;
-    velocities.print();
-
-    cout << endl << "testing insert" << endl;
-    velocities.insert(1985, 1);
-    cout << "size: " << velocities.get_size() << endl;
-    velocities.print();
-
-    cout << endl << "testing remove" << endl;
-    velocities.remove(3);
-    //velocities.remove(0);
-    cout << "size: " << velocities.get_size() << endl;
-    velocities.print();
-
-    return 0;
-}
