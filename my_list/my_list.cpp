@@ -9,7 +9,7 @@ public:
 
 template <class L>
 class my_list {
-private:
+protected:
   node<L>* m_head;
   node<L>* m_end;
   unsigned int m_size;
@@ -79,6 +79,12 @@ public:
       std::cout << element->data << std::endl;
       element = element->next;
     }
+  }
+
+  bool is_empty() {
+    if(m_size == 0)
+      return true;
+    return false;
   }
 
   void destructor() {

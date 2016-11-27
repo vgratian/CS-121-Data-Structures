@@ -7,6 +7,11 @@ int main() {
     std::cout << "size: " << velocities.get_size() << std::endl;
     velocities.print();
 
+    std::cout << std::endl << "testing is_empty" << std::endl;
+    if(velocities.is_empty())
+      std::cout << std::endl << "yes: it's empty" << std::endl;
+    std::cout << std::endl << "not: not empty" << std::endl;
+
     std::cout << std::endl << "testing pushfront" << std::endl;
     velocities.push_front(104);
     velocities.push_front(42);
@@ -24,6 +29,11 @@ int main() {
     //velocities.remove(0);
     std::cout << "size: " << velocities.get_size() << std::endl;
     velocities.print();
+
+    std::cout << std::endl << "testing is_empty" << std::endl;
+    if(velocities.is_empty())
+      std::cout << std::endl << "yes: it's empty" << std::endl;
+    std::cout << std::endl << "no: not empty" << std::endl;
 
     return 0;
 }
