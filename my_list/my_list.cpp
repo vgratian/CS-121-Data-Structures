@@ -1,5 +1,3 @@
-#include <iostream>
-
 template <class N>
 class node {
 public:
@@ -18,6 +16,7 @@ public:
   my_list() { // default constructor
     m_head = NULL;
     m_size = 0;
+    std::cout << "my_list constructor" << std::endl;
   }
 
   unsigned int get_size() {
