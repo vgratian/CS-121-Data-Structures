@@ -3,36 +3,37 @@
 
 int main(){
 
-  my_stack<int> stack;
+  my_stack<int> s;
 
-  std::cout << std::endl << "testing 'is_empty'" << std::endl;
-  if(stack.is_empty())
-    std::cout << "yes: it's empty (size: " << stack.get_size() << ")" << std::endl;
+  std::cout << std::endl << "testing 'is empty'" << std::endl;
+  if(s.is_empty())
+    std::cout << "yes: it's empty (size: " << s.get_size() << ")" << std::endl;
   else
-    std::cout << "no: not empty (size: " << stack.get_size() << ")" << std::endl;
+    std::cout << "no: not empty (size: " << s.get_size() << ")" << std::endl;
 
   std::cout << std::endl << "testing 'push'" << std::endl;
-  stack.push(10);
-  stack.push(9);
-  stack.push(8);
-  stack.push(7);
-  stack.print();
-  std::cout << "size: " << stack.get_size() << std::endl;
+  s.push(1);
+  s.push(2);
+  s.push(3);
+  s.push(4);
+  s.push(5);
+  s.print();
+  std::cout << "size: " << s.get_size() << std::endl;
 
   std::cout << std::endl << "testing 'pop'" << std::endl;
-  std::cout << stack.pop() << std::endl;
-  std::cout << stack.pop() << std::endl;
-  std::cout << "size: " << stack.get_size() << std::endl;
+  std::cout << s.pop() << std::endl;
+  std::cout << s.pop() << std::endl;
+  std::cout << "size: " << s.get_size() << std::endl;
 
   std::cout << std::endl << "testing 'get top'" << std::endl;
-  std::cout << stack.get_top() << std::endl;
-  std::cout << "size: " << stack.get_size() << std::endl;
+  std::cout << s.get_top() << std::endl;
+  std::cout << "size: " << s.get_size() << std::endl;
 
-  std::cout << std::endl << "testing 'is_empty'" << std::endl;
-  if(stack.is_empty())
-    std::cout << "yes: it's empty (size: " << stack.get_size() << ")" << std::endl;
+  std::cout << std::endl << "testing 'is empty'" << std::endl;
+  if(s.is_empty())
+    std::cout << "yes: it's empty (size: " << s.get_size() << ")" << std::endl;
   else
-    std::cout << "no: not empty (size: " << stack.get_size() << ")" << std::endl;
+    std::cout << "no: not empty (size: " << s.get_size() << ")" << std::endl;
 
   return 0;
 }

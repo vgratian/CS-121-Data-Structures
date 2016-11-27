@@ -9,22 +9,12 @@ template <class L>
 class my_stack {
 protected:
   node<L>* m_head;
-  node<L>* m_end;
   unsigned int m_size;
 
 public:
   my_stack() { // default constructor
     m_head = NULL;
     m_size = 0;
-    std::cout << "my_stack constructor" << std::endl;
-  }
-
-  void push(L value) {
-  node<L>* el = new node<L>; // el is the new element
-  el->data = value;
-  el->next = m_head;
-  m_head = el;
-  m_size++;
   }
 
   bool is_empty() {
@@ -35,6 +25,25 @@ public:
 
   unsigned int get_size() {
     return m_size;
+  }
+
+  void push(L value) {
+  node<L>* el = new node<L>; // el is the new element
+  el->data = value;
+  el->next = m_head; // if stack is empty, the value of m_head is NULL
+  m_head = el;
+  m_size++;
+  }
+
+  L pop() {
+    L value = m_head->data;
+    remove(0);
+    return value;
+  }
+
+  L get_top() {
+    L value = m_head->data;
+    return value;
   }
 
   void remove(unsigned int position) {
@@ -64,15 +73,5 @@ public:
       element = element->next;
     }
   }
-
-  L pop() {
-    L value = m_head->data;
-    remove(0);
-    return value;
-    }
-
-  L get_top() {
-    L value = m_head->data;
-    return value; }
 
 };

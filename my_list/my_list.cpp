@@ -9,14 +9,18 @@ template <class L>
 class my_list {
 protected:
   node<L>* m_head;
-  node<L>* m_end;
   unsigned int m_size;
 
 public:
   my_list() { // default constructor
     m_head = NULL;
     m_size = 0;
-    std::cout << "my_list constructor" << std::endl;
+  }
+
+  bool is_empty() {
+    if(m_size == 0)
+      return true;
+    return false;
   }
 
   unsigned int get_size() {
@@ -24,9 +28,9 @@ public:
   }
 
   void push_front(L value) {
-    node<L>* el = new node<L>; // el is the new element
-    el->data = value;
-    el->next = m_head;
+    node<L>* newel = new node<L>; // creating the new element to add
+    newel->data = value;
+    newel->next = m_head;
     m_head = el;
     m_size++;
   }
@@ -37,8 +41,8 @@ public:
     }
 
     else {
-      node<L>* el = new node<L>;
-      el->data = value;
+      node<L>* newel = new node<L>; // creating the new element to add
+      newel->data = value;
 
       node<L>* prev = m_head; // prev is the previous node
       while(position > 1) {
@@ -46,8 +50,8 @@ public:
         position--;
       }
 
-      el->next = prev->next;
-      prev->next = el;
+      newel->next = prev->next;
+      prev->next = newel;
       m_size++;
     }
   }
@@ -78,12 +82,6 @@ public:
       std::cout << element->data << std::endl;
       element = element->next;
     }
-  }
-
-  bool is_empty() {
-    if(m_size == 0)
-      return true;
-    return false;
   }
 
   void destructor() {
