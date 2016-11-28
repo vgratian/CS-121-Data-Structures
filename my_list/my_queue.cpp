@@ -10,6 +10,7 @@ template <class Q>
 class my_queue {
 protected:
   node<Q>* m_head;
+  node<Q>* m_tail;
   unsigned int m_size;
 
 public:
@@ -32,25 +33,24 @@ public:
 
     node<Q>* newel = new node<Q>; // creating the new element
     newel->data = value;
+    newel->next = NULL;
 
     if(m_size == 0) {
       m_head = newel;
+      m_tail = newel;
     }
 
     else {
-      node<Q>* last = m_head;
-      while(last->next != NULL) { // find the last element in the queue
-        last = last->next;
-      }
-
+      node<Q>* last = m_tail;
       last->next = newel;
+      m_tail = newel;
     }
 
     m_size++;
   }
 
 
-  Q dequeue() {
+  Q dequeue() { // needs exception handling if m_size == 0
     Q value;
 
     node<Q>* el = m_head;
