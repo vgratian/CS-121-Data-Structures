@@ -2,7 +2,7 @@
 #include "my_queue.cpp"
 
 main() {
-  my_queue<int> q;
+  Queue<int> q;
 
   std::cout << std::endl << "testing 'is empty'" << std::endl;
   if(q.is_empty())

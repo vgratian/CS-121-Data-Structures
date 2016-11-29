@@ -3,7 +3,7 @@
 
 int main() {
 
-    my_list<int> l;
+    List<int> l;
 
     std::cout << std::endl << "testing get_size" << std::endl;
     std::cout << "size: " << l.get_size() << std::endl;

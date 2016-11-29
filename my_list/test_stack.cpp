@@ -3,7 +3,7 @@
 
 int main(){
 
-  my_stack<int> s;
+  Stack<int> s;
 
   std::cout << std::endl << "testing 'is empty'" << std::endl;
   if(s.is_empty())

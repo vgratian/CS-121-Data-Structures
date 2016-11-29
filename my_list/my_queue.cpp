@@ -1,78 +1,53 @@
+#include "my_list.cpp"
 
-template <class N>
-class node {
+template <class Q>
+class Queue {
+protected:
+  List<Q> m_list;
+
 public:
-  N data;
-  node* next;
+  Queue();
+  bool is_empty();
+  unsigned int get_size();
+  void enqueue(Q value);
+  void print();
+  Q dequeue();
+  Q get_front();
 };
 
 template <class Q>
-class my_queue {
-protected:
-  node<Q>* m_head;
-  node<Q>* m_tail;
-  unsigned int m_size;
+Queue<Q>::Queue() {
+  List<Q> m_list;
+}
 
-public:
-  my_queue() {
-    m_head = NULL;
-    m_size = 0;
-  }
+template <class Q>
+bool Queue<Q>::is_empty() {
+  return m_list.is_empty();
+}
 
-  bool is_empty() {
-    if(m_size == 0)
-      return true;
-    return false;
-  }
+template <class Q>
+unsigned int Queue<Q>::get_size() {
+  return m_list.get_size();
+}
 
-  int get_size() {
-    return m_size;
-  }
+template <class Q>
+void Queue<Q>::enqueue(Q value) { // adds new element at the end of the list
+  m_list.push_back(value);
+}
 
-  void enqueue(Q value) {
+template <class Q>
+void Queue<Q>::print() {
+  m_list.print();
+}
 
-    node<Q>* newel = new node<Q>; // creating the new element
-    newel->data = value;
-    newel->next = NULL;
+template <class Q>
+Q Queue<Q>::dequeue() {  // returns and deletes first element of the list
+  Q data = m_list.get_data(0);
+  m_list.remove(0);
+  return data;
+}
 
-    if(m_size == 0) {
-      m_head = newel;
-      m_tail = newel;
-    }
-
-    else {
-      node<Q>* last = m_tail;
-      last->next = newel;
-      m_tail = newel;
-    }
-
-    m_size++;
-  }
-
-
-  Q dequeue() { // needs exception handling if m_size == 0
-    Q value;
-
-    node<Q>* el = m_head;
-    value = el->data;
-    m_head = el->next;
-    delete el;
-    m_size--;
-
-    return value;
-  }
-
-  Q get_front() {
-    node<Q>* el = m_head;
-    return el->data;
-  }
-
-  void print() {
-    node<Q>* element = m_head; // element == each element in the list
-    while(element != NULL) {
-      std::cout << element->data << std::endl;
-      element = element->next;
-    }
-  }
-
-};
+template <class Q>
+Q Queue<Q>::get_front() { // returns first element of the list
+  return m_list.get_data(0);
+}

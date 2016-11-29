@@ -1,77 +1,53 @@
-template <class N>
-class node {
-public:
-  N data;
-  node* next;
-};
+#include "my_list.cpp"
 
-template <class L>
-class my_stack {
+template <class S>
+class Stack {
 protected:
-  node<L>* m_head;
-  unsigned int m_size;
+  List<S> m_list;
 
 public:
-  my_stack() { // default constructor
-    m_head = NULL;
-    m_size = 0;
-  }
-
-  bool is_empty() {
-    if(m_size == 0)
-      return true;
-    return false;
-  }
-
-  unsigned int get_size() {
-    return m_size;
-  }
-
-  void push(L value) {
-  node<L>* el = new node<L>; // el is the new element
-  el->data = value;
-  el->next = m_head; // if stack is empty, the value of m_head is NULL
-  m_head = el;
-  m_size++;
-  }
-
-  L pop() {
-    L value = m_head->data;
-    remove(0);
-    return value;
-  }
-
-  L get_top() {
-    L value = m_head->data;
-    return value;
-  }
-
-  void remove(unsigned int position) {
-    node<L>* el = m_head;
-
-    if(position == 0) {
-      m_head = el->next;
-    }
-
-    else {
-      node<L>* prev = m_head;   // to identify the previous element
-      for(int i=position; i > 1; i--) {
-        prev = prev->next;
-      }
-
-      el = prev->next;
-      prev->next = el->next;
-    }
-      delete el;
-      m_size--;
-  }
-
-  void print() {
-    node<L>* element = m_head; // element == each element in the list
-    while(element != NULL) {
-      std::cout << element->data << std::endl;
-      element = element->next;
-    }
-  }
-
+  Stack();
+  bool is_empty();
+  unsigned int get_size();
+  void push(S value);
+  void print();
+  S pop();
+  S get_top();
 };
+
+template <class S>
+Stack<S>::Stack() { // default constructor
+  List<S> m_list;
+}
+
+template <class S>
+bool Stack<S>::is_empty() {
+  return m_list.is_empty();
+}
+
+template <class S>
+unsigned int Stack<S>::get_size() {
+  return m_list.get_size();
+}
+
+template <class S>
+void Stack<S>::push(S value) {    // adds element in front of the list
+  m_list.push_front(value);
+}
+
+template <class S>
+void Stack<S>::print() {
+  m_list.print();
+}
+
+template <class S>
+S Stack<S>::pop() {
+  S value = m_list.get_data(0);
+  m_list.remove(0);
+  return value;
+}
+
+template <class S>
+S Stack<S>::get_top() {
+  return m_list.get_data(0);
+}
