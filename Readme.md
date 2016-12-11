@@ -1,11 +1,9 @@
 
 
 ***Rate Professor:***
-An application that allows student to rate their professors.
-
+An application that allows students to rate their professors.
 
 ***User Cases:***
-
 Registration:
   1. Select your university
   2. Enter email
@@ -25,4 +23,4 @@ Rate a professor:
   1. Select a Professor
   2. Select class (you can only rate a Professor if you took his/her class)
   3. Rate from 1 to 5
-  4. Explain 
+  4. Explain
