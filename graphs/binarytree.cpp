@@ -141,7 +141,6 @@ void BinaryTree<B>::__postorder(Node<B>* element) {
   }
 }
 
-
 template <class B>
 void BinaryTree<B>::remove(B value) {   // Removes node from tree
   __remove(m_root, value);
