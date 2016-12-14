@@ -1,3 +1,4 @@
+
 class Session {
 private:
   void start();
@@ -34,5 +35,21 @@ void Session::login() {
 }
 
 void Session::registr() {
-  std::cout << "Regsiter page" << std::endl;
+  std::string name;
+  std::string email;
+  std::string password;
+
+  std::cout << std::endl << std::endl;
+  std::cout << "Regsitation page" << std::endl;
+
+  std::cout << "Name: ";
+  std::cin >> name;
+  std::cout << "E-mail: ";
+  std::cin >> email;
+  std::cout << "Password: ";
+  std::cin >> password;
+
+  std::cout << "Welcome " << name << "!" << std::endl;
+
+  Student newguy(name, email, password);
 }
