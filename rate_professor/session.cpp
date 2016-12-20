@@ -94,7 +94,12 @@ void Session::get_details() {
   std::cin >> m_email;
   std::cout << "Password: ";
   std::cin >> raw_psw;
-  m_psw = hashfn(raw_psw);
+
+  size_t hash_value = hashfn(raw_psw);
+
+  std::stringstream ss;
+  ss << hash_value;
+  m_psw = ss.str();
 }
 
 bool Session::valid_email(std::string email) {
