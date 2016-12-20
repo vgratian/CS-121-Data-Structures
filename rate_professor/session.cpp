@@ -1,15 +1,22 @@
-
 class Session {
 private:
+  std::string m_email;
+  std::string m_psw;
+  Students* aua;
+  bool loggedin;
   void start();
   void login();
   void registr();
+  void get_details();
+  bool valid_email(std::string email);
 
 public:
   Session();
 };
 
 Session::Session() {
+  aua = new Students;
+  loggedin = false;
   start();
 }
 
@@ -31,25 +38,68 @@ void Session::start() {
 }
 
 void Session::login() {
-  std::cout << "Login page" << std::endl;
+  if(loggedin) {
+    std::cout << "You are already logged in." << std::endl;
+    return start();
+  }
+  else {
+    get_details();
+
+    if(aua->is_registered(m_email)) {
+      std::cout << "log in succesful" << std::endl;
+      loggedin = true;
+      return start();
+    }
+
+    else {
+      std::cout << "email or password incorrect" << std::endl;
+      return start();
+    }
+  }
 }
 
 void Session::registr() {
-  std::string name;
-  std::string email;
-  std::string password;
 
-  std::cout << std::endl << std::endl;
+  std::hash <std::string> hash_fn; // This hasqh function is not safe
+  std::string raw_psw;
+
+  std::cout << std::endl;
   std::cout << "Regsitation page" << std::endl;
 
-  std::cout << "Name: ";
-  std::cin >> name;
+  get_details();
+
+  // Check if user is not already registered
+  /*
+  if(aua->is_registered(m_email)) {
+    std::cout << "Email already registered" << std::endl;
+    return start();
+  }
+  else if(!valid_email(m_email)) {
+    std::cout << "Invalid email, please choose email associated with your university." << std::endl;
+    return registr();
+  }
+*/
+  aua->insert(m_email, m_psw);
+  std::cout << "Welcome " << m_email << "!" << std::endl;
+  //std::cout << "Tree size:" << aua->get_size() << std::endl;
+  //loggedin = true;
+  //return start();
+}
+
+void Session::get_details() {
+  std::string raw_psw;
+  std::hash <std::string> hashfn;
+
   std::cout << "E-mail: ";
-  std::cin >> email;
+  std::cin >> m_email;
   std::cout << "Password: ";
-  std::cin >> password;
+  std::cin >> raw_psw;
+  m_psw = hashfn(raw_psw);
+}
 
-  std::cout << "Welcome " << name << "!" << std::endl;
-
-  Student newguy(name, email, password);
+bool Session::valid_email(std::string email) {
+  std::string domain = email.substr(email.find("@") + 1);
+  if(domain == "edu.aua.am")
+    return true;
+  return false;
 }

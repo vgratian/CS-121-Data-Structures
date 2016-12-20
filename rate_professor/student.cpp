@@ -4,21 +4,28 @@ This is a binary tree that contains all the students from an institution
 saved in the "students.csv" file
 */
 
-class student {
-public:
+struct rating {
+  Professor* professor;
+  unsigned int value;
+};
+
+struct student {
+  std::string name;
   std::string email;
   std::string psw;
-  std::string courses[100];
   student* left;
   student* right;
   student* parent;
+  rating ratings[100];
+  std::string courses[100];
 };
 
 class Students {
 private:
   student* m_root;
   unsigned int m_size;
-  void insert_deep(student* parent, std::string email, std::string psw);
+  void insert_data(std::string email, std::string psw);
+  void insert_deeper(student* parent, std::string email, std::string psw);
   void destroy_tree(student* element);
   student* find(student* element, std::string email);
 
@@ -35,14 +42,19 @@ Students::Students() {
   m_root = NULL;
   m_size = 0;
 
+  // Constructor will load all "saved" students and build tree
   std::ifstream file("students.csv");
   std::string str;
   while (std::getline(file, str)) {
     std::string email = str.substr(0, str.find(";"));
     std::string psw = str.substr(str.find(";") + 1);
 
-    insert(email, psw);
-    //std::cout << "new student: " << email << ", " << psw << std::endl;
+    /*convert psw from string to long int
+    std::string::size_type sz;
+    long psw = std::stol (str_psw, &sz); */
+
+    // create new node in the tree
+    insert_data(email, psw);
    }
 }
 
@@ -51,6 +63,16 @@ Students::~Students() {
 }
 
 void Students::insert(std::string email, std::string psw) {
+  // writes new data into file before adding to tree
+
+  std::ofstream file;
+  file.open("students.csv", std::ios_base::app);
+  file << email << ";" << psw << std::endl;
+
+  insert_data(email, psw);
+}
+
+void Students::insert_data(std::string email, std::string psw) {
   if(m_root == NULL) {
     m_root = new student;   // creating the root if it's empty
     m_root->email = email;
@@ -61,14 +83,14 @@ void Students::insert(std::string email, std::string psw) {
     m_size = 1;
   }
   else {
-    insert_deep(m_root, email, psw);
+    insert_deeper(m_root, email, psw);
   }
 }
 
-void Students::insert_deep(student* parent, std::string email, std::string psw) {
+void Students::insert_deeper(student* parent, std::string email, std::string psw) {
   if(email < parent->email) {
     if(parent->left != NULL)
-      insert_deep(parent->left, email, psw);
+      insert_deeper(parent->left, email, psw);
     else {
       parent->left = new student;
       parent->left->email = email;
@@ -81,7 +103,7 @@ void Students::insert_deep(student* parent, std::string email, std::string psw) 
   }
   else if(email >= parent->email) {
     if(parent->right != NULL)
-      insert_deep(parent->right, email, psw);
+      insert_deeper(parent->right, email, psw);
     else {
       parent->right = new student;
       parent->right->email = email;
@@ -94,7 +116,8 @@ void Students::insert_deep(student* parent, std::string email, std::string psw) 
   }
 }
 
-void Students::destroy_tree(student* element) {   // Deletes all elements in the tree
+// Deletes all elements in the tree
+void Students::destroy_tree(student* element) {
   if(element != NULL){
     destroy_tree(element->left);
     destroy_tree(element->right);
@@ -102,13 +125,15 @@ void Students::destroy_tree(student* element) {   // Deletes all elements in the
   }
 }
 
-bool Students::is_registered(std::string email) {    // Checks if tree has any node with value
+// Checks if tree has any student with given email
+bool Students::is_registered(std::string email) {
   student* element = find(m_root, email);
   if(element->email == email)
     return true;
   return false;
 }
 
+// Returns student with email
 student* Students::find(student* element, std::string  email) {
   if(element != NULL) {
     if(email == element->email)
@@ -122,6 +147,7 @@ student* Students::find(student* element, std::string  email) {
     return NULL;
 }
 
+// returns number of students
 int Students::get_size() {
   return m_size;
 }
