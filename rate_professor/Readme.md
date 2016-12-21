@@ -1,9 +1,11 @@
 
 
 ***Rate Professor:***
+
 An application that allows students to rate their professors.
 
 ***User Cases:***
+
 Registration:
   1. Select your university
   2. Enter email

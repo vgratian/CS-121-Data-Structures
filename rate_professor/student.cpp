@@ -33,8 +33,9 @@ public:
   Students();
   ~Students();
   void insert(std::string email, std::string psw);
-  bool is_registered(std::string email);
   int get_size();
+  bool is_registered(std::string email);
+  bool check_psw(std::string email, std::string psw);
 };
 
 Students::Students() {
@@ -48,10 +49,6 @@ Students::Students() {
   while (std::getline(file, str)) {
     std::string email = str.substr(0, str.find(";"));
     std::string psw = str.substr(str.find(";") + 1);
-
-    /*convert psw from string to long int
-    std::string::size_type sz;
-    long psw = std::stol (str_psw, &sz); */
 
     // create new node in the tree
     insert_data(email, psw);
@@ -131,6 +128,10 @@ bool Students::is_registered(std::string email) {
   if(element->email == email)
     return true;
   return false;
+}
+
+bool Students::check_psw(std::string email, std::string psw) {
+  return true; //TODO: under construction
 }
 
 // Returns student with email
