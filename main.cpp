@@ -1,5 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <sstream>
+#include <stdlib.h>
+
 #include "professor.cpp"
 #include "student.cpp"
 #include "course.cpp"
@@ -9,6 +13,6 @@
 main() {
 
   Session hello;
-  
+
   return 0;
 }

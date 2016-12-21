@@ -38,50 +38,43 @@ void Session::start() {
 }
 
 void Session::login() {
-  if(loggedin) {
-    std::cout << "You are already logged in." << std::endl;
-    return start();
-  }
-  else {
-    get_details();
+  get_details();
 
-    if(aua->is_registered(m_email)) {
+  if(aua->is_registered(m_email)) {
+    if(aua->check_psw(m_email, m_psw)) {
       std::cout << "log in succesful" << std::endl;
-      loggedin = true;
-      return start();
     }
+  }
 
-    else {
-      std::cout << "email or password incorrect" << std::endl;
-      return start();
-    }
+  else {
+    std::cout << "email or password incorrect" << std::endl;
   }
 }
 
 void Session::registr() {
 
-  std::hash <std::string> hash_fn; // This hasqh function is not safe
+  std::hash <std::string> hash_fn; // This hash function is not safe
   std::string raw_psw;
 
   std::cout << std::endl;
-  std::cout << "Regsitation page" << std::endl;
+  std::cout << "Regsitation page\n";
 
   get_details();
 
   // Check if user is not already registered
-  /*
+
   if(aua->is_registered(m_email)) {
-    std::cout << "Email already registered" << std::endl;
-    return start();
+    std::cout << "Email already registered\n";
   }
   else if(!valid_email(m_email)) {
-    std::cout << "Invalid email, please choose email associated with your university." << std::endl;
+    std::cout << "Invalid email"
+    << "Please choose email associated with your university.\n";
     return registr();
   }
-*/
+
   aua->insert(m_email, m_psw);
-  std::cout << "Welcome " << m_email << "!" << std::endl;
-  //std::cout << "Tree size:" << aua->get_size() << std::endl;
+  std::cout << "Welcome " << m_email << "!\n";
+  std::cout << "Tree size:" << aua->get_size() << "\n";
   //loggedin = true;
   //return start();
 }
